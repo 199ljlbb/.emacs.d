@@ -57,51 +57,12 @@
 
 ;;select a word
 (transient-mark-mode 1)
-(defun select-current-word ()
-  "Select the word under cursor."
-  (interactive)
-  (let (pt)
-    (skip-chars-backward "-_A-Za-z0-9")
-    (setq pt (point))
-    (skip-chars-forward "-_A-Za-z0-9")
-    (set-mark pt)))
-(global-set-key [double-mouse-1] 'select-current-word)
+(defun my-syntax-table ()
+  (modify-syntax-entry ?- "w")
+  (modify-syntax-entry ?_ "w"))
+(add-hook 'prog-mode-hook 'my-syntax-table)
+(add-hook 'text-mode-hook 'my-syntax-table)
 
-
-(defun select-a-line ()
-  "Select a line continuously."
-  (interactive)
-  (if (not mark-active)
-      (set-mark (line-beginning-position))
-    (let (start-pos end-pos)
-      (setq start-pos (region-beginning)
-            end-pos (region-end))
-      (deactivate-mark)
-      (goto-char start-pos)
-      (set-mark (line-beginning-position))
-      (goto-char end-pos)
-      )
-    )
-  (end-of-line)
-  (forward-char)
-  )
-(global-set-key (kbd "C-l") 'select-a-line)
-
-
-(defun select-current-line ()
-  "Select the current line."
-  (interactive)
-  (let (start-pos end-pos)
-    (setq start-pos (region-beginning)
-          end-pos (region-end))
-    (deactivate-mark)
-    (goto-char start-pos)
-    (set-mark (line-beginning-position))
-    (goto-char end-pos)
-    (beginning-of-line)
-    )
-  )
-(global-set-key [triple-mouse-1] 'select-current-line)
 
 (defun eshell-here ()
   "Opens up a new shell in the directory associated with the
