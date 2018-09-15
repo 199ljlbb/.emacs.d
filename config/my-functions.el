@@ -58,10 +58,32 @@
 ;;select a word
 (transient-mark-mode 1)
 (defun my-syntax-table ()
+  "Add '-' & '_' into the syntax table."
   (modify-syntax-entry ?- "w")
   (modify-syntax-entry ?_ "w"))
 (add-hook 'prog-mode-hook 'my-syntax-table)
 (add-hook 'text-mode-hook 'my-syntax-table)
+
+
+(defun select-a-line ()
+  "Select a line continuously."
+  (interactive)
+  (if (not mark-active)
+      (set-mark (line-beginning-position))
+    (let (start-pos end-pos)
+      (setq start-pos (region-beginning)
+            end-pos (region-end))
+      (deactivate-mark)
+      (goto-char start-pos)
+      (set-mark (line-beginning-position))
+      (goto-char end-pos)
+      )
+    )
+  (end-of-line)
+  (forward-char)
+  )
+(global-set-key (kbd "C-l") 'select-a-line)
+
 
 
 (defun eshell-here ()

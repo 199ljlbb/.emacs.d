@@ -144,6 +144,7 @@
           (t (save-excursion
                (ignore-errors (backward-up-list))
                ad-do-it))))
+  (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
   )
 
 
@@ -283,7 +284,8 @@
       (use-package doom-themes
         :ensure t
         :config
-        (load-theme 'doom-one t)
+        ;; (load-theme 'doom-one t)
+        (load-theme 'doom-dracula t)
         (doom-themes-visual-bell-config)
         (doom-themes-neotree-config)
         (doom-themes-org-config)
