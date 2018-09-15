@@ -1,4 +1,4 @@
-;;; package --- my-packages.el
+﻿;;; package --- my-packages.el
 ;;;
 ;;; Commentary:
 ;;;   Provide the necessary packages for init.el.
@@ -245,6 +245,7 @@
     (progn
       (use-package all-the-icons
         :ensure t
+        :defer t
         )
 
       (use-package all-the-icons-dired
@@ -265,6 +266,16 @@
         :ensure t
         )
 
+      (use-package diminish
+        :ensure t
+        :config
+        (diminish 'flycheck-mode)
+        (diminish 'ivy-mode)
+        (diminish 'smartparens-mode)
+        (diminish 'projectile-mode)
+        (diminish 'which-key-mode)
+        )
+
       (use-package spaceline-all-the-icons
         :ensure t
         :after spaceline
@@ -273,7 +284,7 @@
         (spaceline-all-the-icons--setup-neotree)
         (spaceline-all-the-icons--setup-git-ahead)
         (setq spaceline-all-the-icons-separator-type (quote none))
-        (spaceline-toggle-all-the-icons-mode-icon-on)
+        (spaceline-toggle-all-the-icons-minor-modes-on)
         )
 
       (use-package all-the-icons-ivy
@@ -292,25 +303,6 @@
         (setq-default doom-neotree-file-icons t)
         (setq-default nlinum-format "%4d")
         )
-
-      ;; 这种方式只会在第一次加载major mode hook时进行主题变更
-      (add-hook 'lisp-mode-hook
-                (lambda ()
-                  (disable-theme 'material)
-                  (enable-theme 'doom-one)))
-
-      (add-hook 'python-mode-hook
-                (lambda ()
-                  (use-package material-theme
-                    :ensure t
-                    )
-                  (enable-theme 'material)))
-
-      (add-hook 'c-mode-hook
-                (lambda()
-                  (disable-theme 'material)
-                  (enable-theme 'doom-one)))
-
 
       (setq neo-theme 'icon)
       )
