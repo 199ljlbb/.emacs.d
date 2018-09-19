@@ -14,8 +14,19 @@
 
   (use-package swiper
     :ensure t
+    :config
+    (defun sandric/swiper-or-region (beg end)
+      "Swiper region or 'empty string' if none highlighted."
+      (interactive (if (use-region-p)
+                       (list (region-beginning) (region-end))
+                     (list nil nil)))
+      (if (and beg end)
+          (progn
+            (deactivate-mark)
+            (swiper (buffer-substring-no-properties beg end)))
+        (swiper)))
     :bind
-    ("C-s" . swiper)
+    ("C-s" . sandric/swiper-or-region)
     )
 
   (use-package counsel
@@ -208,6 +219,7 @@
         neo-show-hidden-files t
         neo-vc-integration nil
         neo-window-width 40
+        neo-theme 'icon
         )
 
   (defun neotree-project-dir-toggle ()
@@ -303,30 +315,15 @@
         (setq-default doom-neotree-file-icons t)
         (setq-default nlinum-format "%4d")
         )
-
-      (setq neo-theme 'icon)
       )
 
   ;; Terminal Emacs
-  ;; (use-package color-theme-sanityinc-tomorrow
-  ;;   :ensure t
-  ;;   :config
-  ;;   ;; (load-theme 'sanityinc-tomorrow-bright t)
-  ;;   ;; (load-theme 'sanityinc-tomorrow-day t)
-  ;;   ;; (load-theme 'sanityinc-tomorrow-night t)
-  ;;   ;; (load-theme 'sanityinc-tomorrow-blue t)
-  ;;   (load-theme 'sanityinc-tomorrow-eighties t)
-  ;;   (setq-default nlinum-format "%4d ")
-  ;;   )
-
   (use-package material-theme
     :ensure t
     :config
     (enable-theme 'material)
     (setq-default nlinum-format "%4d ")
     )
-
-  (setq neo-theme 'icon)
   )
 
 

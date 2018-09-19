@@ -8,8 +8,6 @@
 (setenv "PATH" "/usr/local/bin:$PATH" t)
 (push "/usr/local/bin" exec-path)
 
-(define-key key-translation-map (kbd "ESC")(kbd "C-g"))
-
 ;; automatically reload the modifications
 (global-auto-revert-mode t)
 

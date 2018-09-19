@@ -5,6 +5,8 @@
 ;;;
 ;;; Code:
 
+(define-key key-translation-map (kbd "ESC")(kbd "C-g"))
+
 (global-unset-key (kbd "C-k"))
 (global-unset-key (kbd "C-p"))
 (global-unset-key (kbd "C-f"))

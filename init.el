@@ -6,6 +6,10 @@
 ;;; Code:
 
 (setq-default gc-cons-threshold 104857600)
+;; (setq-default url-proxy-services
+;;               '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;;                 ("http" . "web-proxy.cn.hpecorp.net:8080")
+;;                 ("https" . "web-proxy.cn.hpecorp.net:8080")))
 
 (require 'package)
 ;; (add-to-list 'package-archives
