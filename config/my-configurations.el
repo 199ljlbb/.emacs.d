@@ -12,7 +12,7 @@
 (global-auto-revert-mode t)
 
 ;;startup with fullscreen
-(set-frame-parameter nil 'fullscreen 'fullboth)
+;; (set-frame-parameter nil 'fullscreen 'fullboth)
 
 ;;Disable startup message
 (setq inhibit-startup-message t)
