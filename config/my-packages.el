@@ -188,8 +188,7 @@
   :config
   (projectile-mode)
   (setq-default projectile-enable-caching nil)
-  :bind
-  ("C-p" . projectile-find-file)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   )
 
 
