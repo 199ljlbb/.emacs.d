@@ -213,7 +213,6 @@
   :config
   (projectile-mode)
   (setq-default projectile-enable-caching t)
-  (setq projectile-indexing-method 'alien)
   (setq projectile-globally-ignored-file-suffixes
         '("#" "~" ".swp" ".o" ".so" ".exe" ".dll" ".elc" ".pyc" ".jar" "*.class"))
   (setq projectile-globally-ignored-directories
@@ -308,7 +307,7 @@
     (spaceline-all-the-icons--setup-git-ahead)
     (setq spaceline-all-the-icons-separator-type (quote none))
     (spaceline-toggle-all-the-icons-minor-modes-on)
-    (spaceline-toggle-all-the-icons-multiple-cursors-on)
+    (spaceline-toggle-all-the-icons-multiple-cursors)
     )
 
   (use-package doom-themes

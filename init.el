@@ -24,10 +24,10 @@
   (setq inhibit-compacting-font-caches t)
   )
 
-(setq-default url-proxy-services
-              '(("no_proxy" . "^\\(localhost\\|10.*\\)")
-                ("http" . "web-proxy.houston.softwaregrp.net:8080")
-                ("https" . "web-proxy.houston.softwaregrp.net:8080")))
+;; (setq-default url-proxy-services
+;;               '(("no_proxy" . "^\\(localhost\\|10.*\\)")
+;;                 ("http" . "web-proxy.houston.softwaregrp.net:8080")
+;;                 ("https" . "web-proxy.houston.softwaregrp.net:8080")))
 
 (require 'package)
 (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")

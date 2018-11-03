@@ -27,8 +27,8 @@
 (prefer-coding-system        'utf-8)
 (set-input-method nil)
 
-(menu-bar-mode nil)
-(tool-bar-mode nil)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 (global-auto-revert-mode t) ;; Automatically reload the modifications
 (delete-selection-mode t) ;; Enable rewrite the selection region without using delete key
 (global-hl-line-mode t)
@@ -58,27 +58,27 @@
 
 
 
-(let* ((font "Fira Mono")
-       (size 9)
-       (font-size (format "%s-%s" font size)))
-  (setq default-frame-alist `((font . ,font-size)))
-  (set-face-attribute 'default t :font font-size))
+;; (let* ((font "Fira Mono")
+;;        (size 9)
+;;        (font-size (format "%s-%s" font size)))
+;;   (setq default-frame-alist `((font . ,font-size)))
+;;   (set-face-attribute 'default t :font font-size))
 
-(defun hook-if-daemonp (func)
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (with-selected-frame frame
-                    (funcall func))))
-    (funcall func)))
+;; (defun hook-if-daemonp (func)
+;;   (if (daemonp)
+;;       (add-hook 'after-make-frame-functions
+;;                 (lambda (frame)
+;;                   (with-selected-frame frame
+;;                     (funcall func))))
+;;     (funcall func)))
 
-(hook-if-daemonp
- (lambda ()
-   (when (display-graphic-p)
-     (let ((utf8-font "Fira Code"))
-       (set-fontset-font "fontset-startup" '(#x000000 . #x3FFFFF) utf8-font)
-       (set-fontset-font "fontset-default" '(#x000000 . #x3FFFFF) utf8-font)
-       (set-fontset-font "fontset-standard" '(#x000000 . #x3FFFFF) utf8-font)))))
+;; (hook-if-daemonp
+;;  (lambda ()
+;;    (when (display-graphic-p)
+;;      (let ((utf8-font "Fira Code"))
+;;        (set-fontset-font "fontset-startup" '(#x000000 . #x3FFFFF) utf8-font)
+;;        (set-fontset-font "fontset-default" '(#x000000 . #x3FFFFF) utf8-font)
+;;        (set-fontset-font "fontset-standard" '(#x000000 . #x3FFFFF) utf8-font)))))
 
 
 
