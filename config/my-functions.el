@@ -59,7 +59,6 @@
 (transient-mark-mode 1)
 (defun my-syntax-table ()
   "Add '-' & '_' into the syntax table."
-  (modify-syntax-entry ?- "w")
   (modify-syntax-entry ?_ "w"))
 (add-hook 'prog-mode-hook 'my-syntax-table)
 (add-hook 'text-mode-hook 'my-syntax-table)

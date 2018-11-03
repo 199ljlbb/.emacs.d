@@ -8,11 +8,9 @@
 (define-key key-translation-map (kbd "ESC")(kbd "C-g"))
 
 (global-unset-key (kbd "C-k"))
-(global-unset-key (kbd "C-p"))
 (global-unset-key (kbd "C-f"))
 (global-unset-key (kbd "C-d"))
 (global-unset-key (kbd "C-l"))
-(global-unset-key (kbd "C-n"))
 (global-unset-key (kbd "C-b"))
 (global-unset-key (kbd "C-j"))
 (global-unset-key (kbd "C-r"))
