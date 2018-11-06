@@ -18,7 +18,7 @@
   )
 
 (when is-windows?
-  (setq gc-cons-threshold (* 1024 1024 1024))
+  (setq gc-cons-threshold (* 512 1024 1024))
   (setq gc-cons-percentage 0.5)
   (run-with-idle-timer 5 t #'garbage-collect)
   (setq inhibit-compacting-font-caches t)
@@ -33,16 +33,17 @@
 (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
                          ("melpa" . "http://elpa.emacs-china.org/melpa/")))
 
+(setq package-enable-at-startup nil)
 (package-initialize)
 
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(eval-when-compile (require 'use-package))
 
 
 (push "~/.emacs.d/config" load-path)
-(use-package font-lock+)
 (use-package my-key-set)
 (use-package my-packages)
 (use-package my-configurations)

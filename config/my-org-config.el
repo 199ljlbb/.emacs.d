@@ -8,6 +8,7 @@
 
 (use-package org
   :ensure t
+  :defer t
   :config
   (setq org-src-fontify-natively t)
   )
@@ -15,7 +16,7 @@
 
 (use-package org-bullets
   :ensure t
-  :init
+  :defer t
   :config
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
   )

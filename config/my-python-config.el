@@ -8,6 +8,7 @@
 
 (use-package elpy
   :ensure t
+  :defer t
   :config
   (elpy-enable)
   (setq elpy-rpc-python-command "python3")
@@ -19,6 +20,7 @@
 
 (use-package ein
   :ensure t
+  :defer t
   :config
   (setq-default ein:jupyter-default-server-command "/usr/local/bin/jupyter")
   (setq-default ein:jupyter-default-notebook-directory "~/")
@@ -27,6 +29,7 @@
 
 (use-package py-autopep8
   :ensure t
+  :defer t
   :config
   (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
   )
@@ -34,6 +37,7 @@
 
 (use-package jedi
   :ensure t
+  :defer t
   :config
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq-default jedi:complete-on-dot t)

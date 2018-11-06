@@ -44,10 +44,11 @@
 (setq-default c-basic-offset 4)
 
 ;;Scroll by 1 line
-(setq scroll-conservatively 35
-      scroll-margin 0
+(setq scroll-conservatively 10000
+      scroll-margin 1
       scroll-step 1
-      mouse-wheel-scroll-amount (quote (0.01)))
+      )
+(when is-macos? (setq mouse-wheel-scroll-amount (quote (0.01))))
 
 ;;Set xterm-mode-mode ture under terminal
 (when (eq window-system nil) (xterm-mouse-mode t))
@@ -109,7 +110,7 @@
       disable-trailing-modes)
 
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'before-save-hook 'whitespace-cleanup)
+;; (add-hook 'before-save-hook 'whitespace-cleanup)
 
 
 (provide 'my-configurations)

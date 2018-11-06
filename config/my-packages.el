@@ -15,6 +15,7 @@
   :ensure t
   :config
   (diminish 'abbrev-mode)
+  (diminish 'eldoc-mode)
   )
 
 
@@ -32,15 +33,6 @@
                ad-do-it))))
   (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
   (diminish 'smartparens-mode)
-  )
-
-
-(use-package zoom
-  :ensure t
-  :config
-  (setq zoom-size '(0.618 . 0.618))
-  (zoom-mode t)
-  (diminish 'zoom-mode)
   )
 
 
@@ -71,6 +63,7 @@
   :ensure t
   :config
   (global-company-mode)
+  (diminish 'company-mode "C")
   :hook
   (gdb-mode             . (lambda() (company-mode 0)))
   (eshell-mode          . (lambda() (company-mode 0)))
@@ -233,6 +226,7 @@
 
 (use-package neotree
   :ensure t
+  :defer t
   :init
   (defun neotree-project-dir-toggle ()
   "Open NeoTree using the project root (.projectile)"
@@ -276,6 +270,9 @@
 
   (use-package all-the-icons-dired
     :ensure t
+    :defer t
+    :init
+    (use-package font-lock+)
     :after all-the-icons
     :hook
     (dired-mode . all-the-icons-dired-mode)
@@ -294,21 +291,21 @@
     :config (progn (all-the-icons-ivy-setup))
     )
 
-  (use-package spaceline
-    :ensure t
-    )
+  ;; (use-package spaceline
+  ;;   :ensure t
+  ;;   )
 
-  (use-package spaceline-all-the-icons
-    :ensure t
-    :after spaceline all-the-icons
-    :config
-    (spaceline-all-the-icons-theme)
-    (spaceline-all-the-icons--setup-neotree)
-    (spaceline-all-the-icons--setup-git-ahead)
-    (setq spaceline-all-the-icons-separator-type (quote none))
-    (spaceline-toggle-all-the-icons-minor-modes-on)
-    (spaceline-toggle-all-the-icons-multiple-cursors)
-    )
+  ;; (use-package spaceline-all-the-icons
+  ;;   :ensure t
+  ;;   :after spaceline all-the-icons
+  ;;   :config
+  ;;   (spaceline-all-the-icons-theme)
+  ;;   (spaceline-all-the-icons--setup-neotree)
+  ;;   (spaceline-all-the-icons--setup-git-ahead)
+  ;;   (setq spaceline-all-the-icons-separator-type (quote none))
+  ;;   (spaceline-toggle-all-the-icons-minor-modes-on)
+  ;;   (spaceline-toggle-all-the-icons-multiple-cursors)
+  ;;   )
 
   (use-package doom-themes
     :ensure t

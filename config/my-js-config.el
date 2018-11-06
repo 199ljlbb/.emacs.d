@@ -8,6 +8,7 @@
 
 (use-package js2-mode
   :ensure t
+  :defer t
   :mode
    ("\\.js\\'" . js2-mode)
    )
@@ -15,6 +16,7 @@
 
 (use-package js2-refactor
   :ensure t
+  :defer t
   :config
   (add-hook 'js2-mode-hook #'js2-refactor-mode)
   (js2r-add-keybindings-with-prefix "C-c C-r")
@@ -23,6 +25,7 @@
 
 (use-package indium
   :ensure t
+  :defer t
   :config
   (add-hook 'js-mode-hook #'indium-interaction-mode)
   )

@@ -8,6 +8,7 @@
 
 (use-package web-mode
   :ensure t
+  :defer t
   :mode (("\\.phtml\\'"     . web-mode)
          ("\\.tpl\\.php\\'" . web-mode)
          ("\\.[agj]sp\\'"   . web-mode)
@@ -35,6 +36,7 @@
 
 (use-package json-mode
   :ensure t
+  :defer t
   :mode (("\\.tern-config\\'"  . json-mode)
          ("\\.tern-project\\'" . json-mode))
   )
