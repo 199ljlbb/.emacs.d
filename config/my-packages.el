@@ -13,9 +13,7 @@
 
 (use-package diminish
   :ensure t
-  :config
-  (diminish 'abbrev-mode)
-  (diminish 'eldoc-mode)
+  :diminish abbrev-mode eldoc-mode
   )
 
 
@@ -31,6 +29,7 @@
   :init
   (show-paren-mode t)
   (setq-default show-paren-delay 0)
+  :diminish smartparens-mode
   :config
   (smartparens-global-mode t)
   (defadvice show-paren-function (around fix-show-paren-function activate)
@@ -39,7 +38,6 @@
                (ignore-errors (backward-up-list))
                ad-do-it))))
   (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
-  (diminish 'smartparens-mode)
   )
 
 
@@ -60,17 +58,17 @@
 
 (use-package which-key
   :ensure t
+  :diminish which-key-mode
   :config
   (which-key-mode)
-  (diminish 'which-key-mode)
   )
 
 
 (use-package company
   :ensure t
+  :diminish company-mode "Ⓒ"
   :config
   (global-company-mode)
-  (diminish 'company-mode "Ⓒ")
   :hook
   (gdb-mode             . (lambda() (company-mode 0)))
   (eshell-mode          . (lambda() (company-mode 0)))
@@ -91,10 +89,10 @@
 
 (use-package ivy
   :ensure t
+  :diminish ivy-mode
   :config
   (ivy-mode t)
   (setq-default ivy-use-virtual-buffers t)
-  (diminish 'ivy-mode)
   )
 
 
@@ -210,6 +208,7 @@
 
 (use-package projectile
   :ensure t
+  :diminish projectile-mode
   :config
   (projectile-mode)
   (setq-default projectile-enable-caching t)
@@ -218,7 +217,6 @@
   (setq projectile-globally-ignored-directories
         '(".git" "node_modules" "__pycache__" ".vs"))
   (setq projectile-globally-ignored-files '("TAGS" "tags" ".DS_Store"))
-  (diminish 'projectile-mode)
   :bind
   ("C-c p" . projectile-command-map)
   )
