@@ -19,6 +19,13 @@
   )
 
 
+(use-package unicode-fonts
+  :ensure t
+  :config
+  (unicode-fonts-setup)
+  )
+
+
 (use-package smartparens
   :ensure t
   :init
@@ -63,7 +70,7 @@
   :ensure t
   :config
   (global-company-mode)
-  (diminish 'company-mode "C")
+  (diminish 'company-mode "Ⓒ")
   :hook
   (gdb-mode             . (lambda() (company-mode 0)))
   (eshell-mode          . (lambda() (company-mode 0)))
@@ -76,9 +83,9 @@
 
 (use-package flycheck
   :ensure t
+  :diminish flycheck-mode "Ⓕ"
   :config
   (global-flycheck-mode)
-  (diminish 'flycheck-mode "F")
   )
 
 
@@ -291,21 +298,22 @@
     :config (progn (all-the-icons-ivy-setup))
     )
 
-  ;; (use-package spaceline
-  ;;   :ensure t
-  ;;   )
+  (use-package spaceline
+    :ensure t
+    )
 
-  ;; (use-package spaceline-all-the-icons
-  ;;   :ensure t
-  ;;   :after spaceline all-the-icons
-  ;;   :config
-  ;;   (spaceline-all-the-icons-theme)
-  ;;   (spaceline-all-the-icons--setup-neotree)
-  ;;   (spaceline-all-the-icons--setup-git-ahead)
-  ;;   (setq spaceline-all-the-icons-separator-type (quote none))
-  ;;   (spaceline-toggle-all-the-icons-minor-modes-on)
-  ;;   (spaceline-toggle-all-the-icons-multiple-cursors)
-  ;;   )
+  (use-package spaceline-all-the-icons
+    :ensure t
+    :after spaceline all-the-icons
+    :config
+    (spaceline-all-the-icons-theme)
+    (spaceline-all-the-icons--setup-neotree)
+    (spaceline-all-the-icons--setup-git-ahead)
+    (setq spaceline-all-the-icons-separator-type (quote none))
+    (spaceline-toggle-all-the-icons-minor-modes-on)
+    (spaceline-toggle-all-the-icons-multiple-cursors)
+    (setq powerline-text-scale-factor 1.0)
+    )
 
   (use-package doom-themes
     :ensure t
