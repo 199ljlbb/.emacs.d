@@ -45,7 +45,7 @@
   :ensure t
   :config
   (global-nlinum-mode)
-  (setq-default nlinum-format "%4d")
+  (setq nlinum-format "%4d")
   )
 
 
@@ -87,12 +87,20 @@
   )
 
 
+(use-package ag
+  :ensure t
+  :bind
+  ("C-S-s" . ag)
+  )
+
+
 (use-package ivy
   :ensure t
   :diminish ivy-mode
   :config
   (ivy-mode t)
-  (setq-default ivy-use-virtual-buffers t)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
   )
 
 
@@ -121,9 +129,13 @@
   :bind
   ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
-  ("C-h f"   . counsel-describe-function)
-  ("C-h v"   . counsel-describe-variable)
-  )
+  ("<f1> f"  . counsel-describe-function)
+  ("<f1> v"  . counsel-describe-variable)
+  ("<f1> l"  . counsel-find-library)
+  ("<f2> i"  . counsel-info-lookup-symbol)
+  ("<f2> u"  . counsel-unicode-char)
+  ("C-c k"   . counsel-ag)
+)
 
 
 (use-package switch-window
@@ -189,19 +201,12 @@
   )
 
 
-(use-package ag
-  :ensure t
-  :bind
-  ("C-S-f" . ag)
-  )
-
-
 (use-package dumb-jump
   :ensure t
   :config
   (setq dumb-jump-prefer-searcher 'ag)
   :bind
-  ("M-d o" . dumb-jump-go-other-window)
+  ("M-d o" . dumb-jump-go)
   ("M-d ," . dumb-jump-back)
   )
 
@@ -211,7 +216,7 @@
   :diminish projectile-mode
   :config
   (projectile-mode)
-  (setq-default projectile-enable-caching t)
+  (setq projectile-enable-caching t)
   (setq projectile-globally-ignored-file-suffixes
         '("#" "~" ".swp" ".o" ".so" ".exe" ".dll" ".elc" ".pyc" ".jar" "*.class"))
   (setq projectile-globally-ignored-directories
@@ -237,9 +242,7 @@
   "Open NeoTree using the project root (.projectile)"
   (interactive)
   (let ((project-dir
-         (ignore-errors
-           (projectile-project-root)
-           ))
+         (ignore-errors (projectile-project-root)))
         (file-name (buffer-file-name))
         (neo-smart-open t))
     (if (and (fboundp 'neo-global--window-exists-p)
@@ -262,6 +265,8 @@
         neo-window-width 40
         neo-theme 'icon
         )
+  :hook
+  (neo-after-create . (lambda(_unused) (nlinum-mode -1)))
   :bind
   ("M-k M-b" . neotree-project-dir-toggle)
   )
@@ -304,13 +309,13 @@
     :ensure t
     :after spaceline all-the-icons
     :config
+    (setq powerline-text-scale-factor 1.0)
+    (setq spaceline-all-the-icons-separator-type (quote none))
     (spaceline-all-the-icons-theme)
     (spaceline-all-the-icons--setup-neotree)
     (spaceline-all-the-icons--setup-git-ahead)
-    (setq spaceline-all-the-icons-separator-type (quote none))
     (spaceline-toggle-all-the-icons-minor-modes-on)
     (spaceline-toggle-all-the-icons-multiple-cursors)
-    (setq powerline-text-scale-factor 1.0)
     )
 
   (use-package doom-themes
