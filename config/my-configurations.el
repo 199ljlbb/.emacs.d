@@ -53,37 +53,6 @@
 (when (eq window-system nil) (xterm-mouse-mode t))
 
 
-
-
-
-
-
-;; (let* ((font "Fira Mono")
-;;        (size 9)
-;;        (font-size (format "%s-%s" font size)))
-;;   (setq default-frame-alist `((font . ,font-size)))
-;;   (set-face-attribute 'default t :font font-size))
-
-;; (defun hook-if-daemonp (func)
-;;   (if (daemonp)
-;;       (add-hook 'after-make-frame-functions
-;;                 (lambda (frame)
-;;                   (with-selected-frame frame
-;;                     (funcall func))))
-;;     (funcall func)))
-
-;; (hook-if-daemonp
-;;  (lambda ()
-;;    (when (display-graphic-p)
-;;      (let ((utf8-font "Fira Code"))
-;;        (set-fontset-font "fontset-startup" '(#x000000 . #x3FFFFF) utf8-font)
-;;        (set-fontset-font "fontset-default" '(#x000000 . #x3FFFFF) utf8-font)
-;;        (set-fontset-font "fontset-standard" '(#x000000 . #x3FFFFF) utf8-font)))))
-
-
-
-
-
 (setq-default show-trailing-whitespace t) ;;Show whitespace of trailing
 (set-face-background 'trailing-whitespace "#b14770")
 
@@ -129,8 +98,3 @@
 
 (provide 'my-configurations)
 ;;; my-configurations.el ends here
-
-
-;; Unicode characters
-;; ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ
-;; ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ
