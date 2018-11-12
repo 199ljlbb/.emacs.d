@@ -17,6 +17,12 @@
   )
 
 
+(use-package magit
+  :ensure t
+  :defer t
+  )
+
+
 (use-package unicode-fonts
   :ensure t
   :config
@@ -89,6 +95,9 @@
 
 (use-package ag
   :ensure t
+  :config
+  (setq ag-highlight-search t)
+  (setq ag-reuse-buffers 't)
   :bind
   ("C-S-s" . ag)
   )
@@ -107,8 +116,8 @@
 (use-package swiper
   :ensure t
   :after ivy
-  :config
-  (defun sandric/swiper-or-region (beg end)
+  :init
+  (defun swiper-the-region (beg end)
     "Swiper region or 'empty string' if none highlighted."
     (interactive (if (use-region-p)
                      (list (region-beginning) (region-end))
@@ -119,13 +128,25 @@
           (swiper (buffer-substring-no-properties beg end)))
       (swiper)))
   :bind
-  ("C-s" . sandric/swiper-or-region)
+  ("C-s" . swiper-the-region)
   )
 
 
 (use-package counsel
   :ensure t
   :after ivy
+  :init
+  (defun counsel-ag-the-region (beg end)
+    "Counsel ag region or 'empty string' if none highlighted."
+    (interactive (if (use-region-p)
+                     (list (region-beginning) (region-end))
+                   (list nil nil)))
+    (if (and beg end)
+        (progn
+          (deactivate-mark)
+          (counsel-ag (buffer-substring-no-properties beg end)))
+      (counsel-ag)))
+
   :bind
   ("M-x"     . counsel-M-x)
   ("C-x C-f" . counsel-find-file)
@@ -134,7 +155,7 @@
   ("<f1> l"  . counsel-find-library)
   ("<f2> i"  . counsel-info-lookup-symbol)
   ("<f2> u"  . counsel-unicode-char)
-  ("C-c k"   . counsel-ag)
+  ("C-c k"   . counsel-ag-the-region)
 )
 
 

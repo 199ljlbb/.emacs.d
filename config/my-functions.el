@@ -52,7 +52,6 @@
               (regexp-quote sym))))
         regexp-history)
   (call-interactively 'occur))
-(global-set-key (kbd "C-f") 'occur-dwim)
 
 
 ;;select a word
