@@ -38,31 +38,18 @@
   )
 
 
-(use-package lsp-ui
-  :ensure t
-  :defer t
-  :after lsp-mode
-  :hook
-  (lsp-mode . lsp-ui-mode)
-  (lsp-mode . lsp-ui-sideline-mode)
-  (lsp-mode . lsp-ui-doc-mode)
-  )
-
-
 (use-package cquery
   :ensure t
   :defer t
   :commands lsp-cquery-enable
   :init
-  (defun cquery-enable ()
-    "Enable cquery."
-    (condition-case nil (lsp-cquery-enable) (user-error nil))
-    )
+  (defun cquery-enable () (condition-case nil (lsp-cquery-enable) (user-error nil)))
   :hook
   (c-mode   . (lambda() (cquery-enable)))
   (c++-mode . (lambda() (cquery-enable)))
   :config
-  (setq cquery-executable "~/.emacs.config/cquery/build/release/bin/cquery.exe")
+  (defvar emacs-config-dir "~/.emacs.config/cquery/build/release/bin/")
+  (setq cquery-executable (concat emacs-config-dir (if is-windows? "cquery.exe" "cquery")))
   (setq cquery-cache-dir "~/.emacs.config/.cquery.cache")
   (setq cquery-extra-args '("--log-file=~/AppData/Roaming/.emacs.config/.cquery.log/cquery.log"))
   (setq cquery-extra-init-params '(:extraClangArguments ("-driver-mode=cl")))
