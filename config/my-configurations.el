@@ -78,17 +78,6 @@
 ;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;; (add-hook 'before-save-hook 'whitespace-cleanup)
 
-(custom-set-variables
- '(spaceline-all-the-icons-flycheck-alternate t)
- '(spaceline-all-the-icons-hide-long-buffer-path t)
- '(spaceline-all-the-icons-highlight-file-name t)
- '(spaceline-all-the-icons-icon-set-flycheck-slim (quote solid))
- '(spaceline-all-the-icons-icon-set-git-ahead (quote commit))
- '(spaceline-all-the-icons-icon-set-mc (quote pointer))
- '(spaceline-all-the-icons-icon-set-vc-icon-git (quote git-logo))
- '(spaceline-all-the-icons-slim-render t)
- )
-
 (custom-set-faces
  '(spaceline-highlight-face ((t (:background "white" :foreground "#3E3D31" :inherit (quote mode-line)))))
  )
