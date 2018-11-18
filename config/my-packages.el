@@ -17,6 +17,15 @@
   )
 
 
+(use-package highlight-indent-guides
+  :ensure t
+  :diminish highlight-indent-guides-mode
+  :config
+  (setq highlight-indent-guides-method 'character)
+  :hook (prog-mode . highlight-indent-guides-mode)
+  )
+
+
 (use-package magit
   :ensure t
   :defer t
