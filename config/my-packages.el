@@ -252,7 +252,7 @@
   (setq projectile-globally-ignored-directories
         '(".git" "node_modules" "__pycache__" ".vs"))
   (setq projectile-globally-ignored-files '("TAGS" "tags" ".DS_Store"))
-  :bind
+  :bind-keymap
   ("C-c p" . projectile-command-map)
   )
 
@@ -311,11 +311,9 @@
   (use-package all-the-icons-dired
     :ensure t
     :defer t
-    :init
-    (use-package font-lock+)
+    :init (use-package font-lock+)
     :after all-the-icons
-    :hook
-    (dired-mode . all-the-icons-dired-mode)
+    :hook (dired-mode . all-the-icons-dired-mode)
     )
 
   (use-package all-the-icons-gnus
@@ -333,6 +331,7 @@
 
   (use-package spaceline
     :ensure t
+    :custom-face (spaceline-highlight-face ((t (:background "white" :foreground "#3E3D31" :inherit (quote mode-line)))))
     )
 
   (use-package spaceline-all-the-icons
