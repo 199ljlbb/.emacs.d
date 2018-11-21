@@ -20,8 +20,7 @@
 (use-package highlight-indent-guides
   :ensure t
   :diminish highlight-indent-guides-mode
-  :config
-  (setq highlight-indent-guides-method 'character)
+  :config (setq highlight-indent-guides-method 'character)
   :hook (prog-mode . highlight-indent-guides-mode)
   )
 
@@ -34,8 +33,7 @@
 
 (use-package unicode-fonts
   :ensure t
-  :config
-  (unicode-fonts-setup)
+  :commands (unicode-fonts-setup)
   )
 
 
@@ -46,6 +44,8 @@
   (setq-default show-paren-delay 0)
   :diminish smartparens-mode
   :config
+  (declare-function smartparens-global-mode "smartparens")
+  (declare-function sp-local-pair "smartparens")
   (smartparens-global-mode t)
   (defadvice show-paren-function (around fix-show-paren-function activate)
     (cond ((looking-at-p "\\s(") ad-do-it)
@@ -59,6 +59,7 @@
 (use-package nlinum
   :ensure t
   :config
+  (declare-function global-nlinum-mode "nlinum")
   (global-nlinum-mode)
   (setq nlinum-format "%4d")
   )
@@ -67,6 +68,7 @@
 (use-package popwin
   :ensure t
   :config
+  (declare-function popwin-mode "popwin")
   (popwin-mode)
   )
 
@@ -75,6 +77,7 @@
   :ensure t
   :diminish which-key-mode
   :config
+  (declare-function which-key-mode "which-key")
   (which-key-mode)
   )
 
@@ -83,6 +86,8 @@
   :ensure t
   :diminish company-mode "Ⓒ"
   :config
+  (declare-function global-company-mode "company")
+  (declare-function company-mode "company")
   (global-company-mode)
   :hook
   (gdb-mode             . (lambda() (company-mode 0)))
@@ -98,6 +103,7 @@
   :ensure t
   :diminish flycheck-mode "Ⓕ"
   :config
+  (declare-function global-flycheck-mode "flycheck")
   (global-flycheck-mode)
   )
 
@@ -116,6 +122,7 @@
   :ensure t
   :diminish ivy-mode
   :config
+  (declare-function ivy-mode "ivy")
   (ivy-mode t)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
@@ -126,6 +133,7 @@
   :ensure t
   :after ivy
   :init
+  (declare-function swiper "swiper")
   (defun swiper-the-region (beg end)
     "Swiper region or 'empty string' if none highlighted."
     (interactive (if (use-region-p)
@@ -145,6 +153,7 @@
   :ensure t
   :after ivy
   :init
+  (declare-function counsel-ag "counsel")
   (defun counsel-ag-the-region (beg end)
     "Counsel ag region or 'empty string' if none highlighted."
     (interactive (if (use-region-p)
@@ -185,6 +194,7 @@
 (use-package undo-tree
   :ensure t
   :config
+  (declare-function global-undo-tree-mode "undo-tree")
   (global-undo-tree-mode 1)
   :bind
   ("C-z" . undo)
@@ -245,6 +255,7 @@
   :ensure t
   :diminish projectile-mode
   :config
+  (declare-function projectile-mode "projectile")
   (projectile-mode)
   (setq projectile-enable-caching t)
   (setq projectile-globally-ignored-file-suffixes
@@ -260,6 +271,7 @@
 (use-package counsel-projectile
   :ensure t
   :config
+  (declare-function counsel-projectile-mode "counsel-projectile")
   (counsel-projectile-mode)
   )
 
@@ -268,6 +280,12 @@
   :ensure t
   :defer t
   :init
+  (declare-function projectile-project-root "projectile")
+  (declare-function neotree-dir "neotree")
+  (declare-function neotree-hide "neotree")
+  (declare-function neotree-find "neotree")
+  (declare-function neotree-toggle "neotree")
+  (declare-function nlinum-mode "nlinum")
   (defun neotree-project-dir-toggle ()
   "Open NeoTree using the project root (.projectile)"
   (interactive)
@@ -320,13 +338,16 @@
     :ensure t
     :after all-the-icons
     :config
+    (declare-function all-the-icons-gnus-setup "all-the-icons-gnus")
     (all-the-icons-gnus-setup)
     )
 
   (use-package all-the-icons-ivy
     :ensure t
     :after all-the-icons ivy
-    :config (progn (all-the-icons-ivy-setup))
+    :config
+    (declare-function all-the-icons-ivy-setup "all-the-icons-ivy")
+    (progn (all-the-icons-ivy-setup))
     )
 
   (use-package spaceline
@@ -348,6 +369,11 @@
     (setq spaceline-all-the-icons-hide-long-buffer-path t)
     (setq spaceline-all-the-icons-highlight-file-name t)
     (setq spaceline-all-the-icons-slim-render t)
+    (declare-function spaceline-all-the-icons-theme "spaceline-all-the-icons")
+    (declare-function spaceline-all-the-icons--setup-neotree "spaceline-all-the-icons")
+    (declare-function spaceline-all-the-icons--setup-git-ahead "spaceline-all-the-icons")
+    (declare-function spaceline-toggle-all-the-icons-minor-modes-on "spaceline-all-the-icons")
+    (declare-function spaceline-toggle-all-the-icons-multiple-cursors "spaceline-all-the-icons")
     (spaceline-all-the-icons-theme)
     (spaceline-all-the-icons--setup-neotree)
     (spaceline-all-the-icons--setup-git-ahead)
@@ -358,6 +384,9 @@
   (use-package doom-themes
     :ensure t
     :config
+    (declare-function doom-themes-visual-bell-config "doom-theme")
+    (declare-function doom-themes-neotree-config "doom-theme")
+    (declare-function doom-themes-org-config "doom-theme")
     (load-theme 'doom-dracula t)
     (doom-themes-visual-bell-config)
     (doom-themes-neotree-config)

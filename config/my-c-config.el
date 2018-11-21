@@ -40,7 +40,6 @@
 
 (use-package cquery
   :ensure t
-  :defer t
   :commands lsp-cquery-enable
   :init
   (defun cquery-enable () (condition-case nil (lsp-cquery-enable) (user-error nil)))

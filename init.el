@@ -27,11 +27,11 @@
 (setq package-enable-at-startup nil)
 (package-initialize)
 
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
+(require 'bind-key)
 
 (use-package my-key-set)
 (use-package my-packages)

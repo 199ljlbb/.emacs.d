@@ -111,59 +111,76 @@
 (define-key ctl-x-4-map "t" 'toggle-window-split)
 
 
-(defun window-toggle-split-direction ()
-  "Switch window split from horizontally to vertically, or vice versa.
 
-i.e. change right window to bottom, or change bottom window to right."
+;; (defun window-toggle-split-direction ()
+;;   "Switch window split from horizontally to vertically, or vice versa.
+
+;; i.e. change right window to bottom, or change bottom window to right."
+;;   (interactive)
+;;   (require 'windmove)
+;;   (let ((done))
+;;     (dolist (dirs '((right . down) (down . right)))
+;;       (unless done
+;;         (let* ((win (selected-window))
+;;                (nextdir (car dirs))
+;;                (neighbour-dir (cdr dirs))
+;;                (next-win (windmove-find-other-window nextdir win))
+;;                (neighbour1 (windmove-find-other-window neighbour-dir win))
+;;                (neighbour2 (if next-win (with-selected-window next-win
+;;                                           (windmove-find-other-window neighbour-dir next-win)))))
+;;           ;;(message "win: %s\nnext-win: %s\nneighbour1: %s\nneighbour2:%s" win next-win neighbour1 neighbour2)
+;;           (setq done (and (eq neighbour1 neighbour2)
+;;                           (not (eq (minibuffer-window) next-win))))
+;;           (if done
+;;               (let* ((other-buf (window-buffer next-win)))
+;;                 (delete-window next-win)
+;;                 (if (eq nextdir 'right)
+;;                     (split-window-vertically)
+;;                   (split-window-horizontally))
+;;                 (set-window-buffer (windmove-find-other-window neighbour-dir) other-buf))))))))
+
+(defun er-byte-compile-init-dir ()
+  "Byte-compile all your dotfiles."
   (interactive)
-  (require 'windmove)
-  (let ((done))
-    (dolist (dirs '((right . down) (down . right)))
-      (unless done
-        (let* ((win (selected-window))
-               (nextdir (car dirs))
-               (neighbour-dir (cdr dirs))
-               (next-win (windmove-find-other-window nextdir win))
-               (neighbour1 (windmove-find-other-window neighbour-dir win))
-               (neighbour2 (if next-win (with-selected-window next-win
-                                          (windmove-find-other-window neighbour-dir next-win)))))
-          ;;(message "win: %s\nnext-win: %s\nneighbour1: %s\nneighbour2:%s" win next-win neighbour1 neighbour2)
-          (setq done (and (eq neighbour1 neighbour2)
-                          (not (eq (minibuffer-window) next-win))))
-          (if done
-              (let* ((other-buf (window-buffer next-win)))
-                (delete-window next-win)
-                (if (eq nextdir 'right)
-                    (split-window-vertically)
-                  (split-window-horizontally))
-                (set-window-buffer (windmove-find-other-window neighbour-dir) other-buf))))))))
+  (byte-recompile-directory "~/.emacs.d" 0))
 
 
-(defun eshell-here ()
-  "Opens up a new shell in the directory associated with the
-current buffer's file. The eshell is renamed to match that
-directory to make multiple eshell windows easier."
-  (interactive)
-  (let* ((parent (if (buffer-file-name)
-                     (file-name-directory (buffer-file-name))
-                   default-directory))
-         (height (/ (window-total-height) 3))
-         (name   (car (last (split-string parent "/" t)))))
-    (split-window-vertically (- height))
-    (other-window 1)
-    (eshell "new")
-    (rename-buffer (concat "*eshell: " name "*"))
+(defun er-remove-elc-on-save ()
+  "If you're saving an Emacs Lisp file, likely the .elc is no longer valid."
+  (add-hook 'after-save-hook
+            (lambda ()
+              (if (file-exists-p (concat buffer-file-name "c"))
+                  (delete-file (concat buffer-file-name "c"))))
+            nil
+            t))
+(add-hook 'emacs-lisp-mode-hook 'er-remove-elc-on-save)
 
-    (insert (concat "ls"))
-    (eshell-send-input)))
 
-(global-set-key (kbd "C-`") 'eshell-here)
+;; (defun eshell-here ()
+;;   "Opens up a new shell in the directory associated with the
+;; current buffer's file. The eshell is renamed to match that
+;; directory to make multiple eshell windows easier."
+;;   (interactive)
+;;   (let* ((parent (if (buffer-file-name)
+;;                      (file-name-directory (buffer-file-name))
+;;                    default-directory))
+;;          (height (/ (window-total-height) 3))
+;;          (name   (car (last (split-string parent "/" t)))))
+;;     (split-window-vertically (- height))
+;;     (other-window 1)
+;;     (eshell "new")
+;;     (rename-buffer (concat "*eshell: " name "*"))
 
-(defun eshell/x ()
-  (interactive)
-  (insert "exit")
-  (eshell-send-input)
-  (delete-window))
+;;     (insert (concat "ls"))
+;;     (eshell-send-input)))
+
+;; (global-set-key (kbd "C-`") 'eshell-here)
+
+;; (defun eshell/x ()
+;;   (interactive)
+;;   (insert "exit")
+;;   (eshell-send-input)
+;;   (delete-window))
 
 (provide 'my-functions)
 ;;; my-functions.el ends here

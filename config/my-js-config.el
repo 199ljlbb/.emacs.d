@@ -27,6 +27,7 @@
   :ensure t
   :defer t
   :config
+  (declare-function indium-interaction-mode "indium")
   (add-hook 'js-mode-hook #'indium-interaction-mode)
   )
 
