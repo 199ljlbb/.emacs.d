@@ -5,7 +5,12 @@
 ;;;
 ;;; Code:
 
-(define-key key-translation-map (kbd "ESC")(kbd "C-g"))
+
+(defvar is-linux?)
+(defvar is-macos?)
+(defvar is-windows?)
+
+(cond (is-macos? (if (display-graphic-p) (define-key key-translation-map (kbd "ESC")(kbd "C-g")))))
 
 (global-unset-key (kbd "C-k"))
 (global-unset-key (kbd "C-f"))

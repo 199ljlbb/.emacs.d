@@ -17,23 +17,23 @@
   "Is operating system Windows?"
   )
 
-(push "~/.emacs.d/config" load-path)
-(load "optional-config.el")
-
-(require 'package)
-(setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
-                         ("melpa" . "http://elpa.emacs-china.org/melpa/")))
-
-(setq package-enable-at-startup nil)
-(package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile (require 'use-package))
-(require 'bind-key)
-
 (let ((file-name-handler-alist nil))
+  (push "~/.emacs.d/config" load-path)
+  (load "optional-config.el")
+
+  (require 'package)
+  (setq package-archives '(("gnu"   . "http://elpa.emacs-china.org/gnu/")
+                           ("melpa" . "http://elpa.emacs-china.org/melpa/")))
+
+  (setq package-enable-at-startup nil)
+  (package-initialize)
+
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (eval-when-compile (require 'use-package))
+  (require 'bind-key)
+
   (use-package my-key-set)
   (use-package my-packages)
   (use-package my-configurations)

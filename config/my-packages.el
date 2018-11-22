@@ -38,13 +38,13 @@
   :config
   (declare-function smartparens-global-mode "smartparens")
   (declare-function sp-local-pair "smartparens")
-  (smartparens-global-mode t)
   (defadvice show-paren-function (around fix-show-paren-function activate)
     (cond ((looking-at-p "\\s(") ad-do-it)
           (t (save-excursion
                (ignore-errors (backward-up-list))
                ad-do-it))))
   (sp-local-pair '(emacs-lisp-mode lisp-interaction-mode) "'" nil :actions nil)
+  :hook (prog-mode . smartparens-mode)
   )
 
 
@@ -53,8 +53,8 @@
   :config
   (declare-function global-nlinum-mode "nlinum")
   (declare-function nlinum-mode "nlinum")
-  (global-nlinum-mode)
   (setq nlinum-format "%4d")
+  :hook (prog-mode . nlinum-mode)
   )
 
 
@@ -62,7 +62,7 @@
   :ensure t
   :config
   (declare-function popwin-mode "popwin")
-  (popwin-mode)
+  :hook (after-init . popwin-mode)
   )
 
 
@@ -71,7 +71,7 @@
   :diminish which-key-mode
   :config
   (declare-function which-key-mode "which-key")
-  (which-key-mode)
+  :hook (after-init . which-key-mode)
   )
 
 
@@ -81,8 +81,8 @@
   :config
   (declare-function global-company-mode "company")
   (declare-function company-mode "company")
-  (global-company-mode)
   :hook
+  (after-init . global-company-mode)
   (gdb-mode             . (lambda() (company-mode 0)))
   (eshell-mode          . (lambda() (company-mode 0)))
   (shell-mode           . (lambda() (company-mode 0)))
@@ -97,7 +97,7 @@
   :diminish flycheck-mode "Ⓕ"
   :config
   (declare-function global-flycheck-mode "flycheck")
-  (global-flycheck-mode)
+  :hook (after-init . global-flycheck-mode)
   )
 
 
@@ -199,6 +199,7 @@
 
 (use-package csv-mode
   :ensure t
+  :defer t
   )
 
 
@@ -252,13 +253,13 @@
   :config
   (declare-function projectile-mode "projectile")
   (declare-function projectile-project-root "projectile")
-  (projectile-mode)
   (setq projectile-enable-caching t)
   (setq projectile-globally-ignored-file-suffixes
         '("#" "~" ".swp" ".o" ".so" ".exe" ".dll" ".elc" ".pyc" ".jar" "*.class"))
   (setq projectile-globally-ignored-directories
         '(".git" "node_modules" "__pycache__" ".vs"))
   (setq projectile-globally-ignored-files '("TAGS" "tags" ".DS_Store"))
+  :hook (after-init . projectile-mode)
   :bind-keymap
   ("C-c p" . projectile-command-map)
   )
@@ -268,7 +269,7 @@
   :ensure t
   :config
   (declare-function counsel-projectile-mode "counsel-projectile")
-  (counsel-projectile-mode)
+  :hook (after-init . counsel-projectile-mode)
   )
 
 
@@ -324,17 +325,9 @@
   (use-package all-the-icons-dired
     :ensure t
     :defer t
-    :init (use-package font-lock+)
+    :commands (use-package font-lock+)
     :after all-the-icons
     :hook (dired-mode . all-the-icons-dired-mode)
-    )
-
-  (use-package all-the-icons-gnus
-    :ensure t
-    :after all-the-icons
-    :config
-    (declare-function all-the-icons-gnus-setup "all-the-icons-gnus")
-    (all-the-icons-gnus-setup)
     )
 
   (use-package all-the-icons-ivy
