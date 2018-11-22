@@ -17,14 +17,6 @@
   )
 
 
-(use-package highlight-indent-guides
-  :ensure t
-  :diminish highlight-indent-guides-mode
-  :config (setq highlight-indent-guides-method 'character)
-  :hook (prog-mode . highlight-indent-guides-mode)
-  )
-
-
 (use-package magit
   :ensure t
   :defer t
@@ -60,6 +52,7 @@
   :ensure t
   :config
   (declare-function global-nlinum-mode "nlinum")
+  (declare-function nlinum-mode "nlinum")
   (global-nlinum-mode)
   (setq nlinum-format "%4d")
   )
@@ -113,6 +106,8 @@
   :config
   (setq ag-highlight-search t)
   (setq ag-reuse-buffers 't)
+  :hook
+  (ag-mode . (lambda() (nlinum-mode -1)))
   :bind
   ("C-S-s" . ag)
   )
@@ -256,6 +251,7 @@
   :diminish projectile-mode
   :config
   (declare-function projectile-mode "projectile")
+  (declare-function projectile-project-root "projectile")
   (projectile-mode)
   (setq projectile-enable-caching t)
   (setq projectile-globally-ignored-file-suffixes
@@ -280,12 +276,10 @@
   :ensure t
   :defer t
   :init
-  (declare-function projectile-project-root "projectile")
   (declare-function neotree-dir "neotree")
   (declare-function neotree-hide "neotree")
   (declare-function neotree-find "neotree")
   (declare-function neotree-toggle "neotree")
-  (declare-function nlinum-mode "nlinum")
   (defun neotree-project-dir-toggle ()
   "Open NeoTree using the project root (.projectile)"
   (interactive)
@@ -324,6 +318,7 @@
   "Configurations for all-the-icons."
   (use-package all-the-icons
     :ensure t
+    :config (setq inhibit-compacting-font-caches t)
     )
 
   (use-package all-the-icons-dired
@@ -381,6 +376,13 @@
     (spaceline-toggle-all-the-icons-multiple-cursors)
     )
 
+  (use-package highlight-indent-guides
+    :ensure t
+    :diminish highlight-indent-guides-mode
+    :config (setq highlight-indent-guides-method 'character)
+    :hook (prog-mode . highlight-indent-guides-mode)
+    )
+
   (use-package doom-themes
     :ensure t
     :config
@@ -400,8 +402,19 @@
   "Configurations for terminal mode."
   (use-package material-theme
     :ensure t
+    :config (enable-theme 'material)
+    )
+
+  (use-package feebleline
+    :ensure t
+    :custom
+    (feebleline-show-git-branch t)
+    (feebleline-show-dir t)
+    (feebleline-show-time t)
+    (feebleline-show-previous-buffer t)
     :config
-    (enable-theme 'material)
+    (declare-function feebleline-mode "feebleline")
+    (feebleline-mode t)
     )
   )
 
