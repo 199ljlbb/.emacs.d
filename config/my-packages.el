@@ -53,8 +53,7 @@
   :init
   (declare-function global-nlinum-mode "nlinum")
   (declare-function nlinum-mode "nlinum")
-  :config
-  (setq nlinum-format "%4d")
+  :config (setq nlinum-format "%4d")
   :hook (prog-mode . nlinum-mode)
   )
 
@@ -104,10 +103,8 @@
   :config
   (setq ag-highlight-search t)
   (setq ag-reuse-buffers 't)
-  :hook
-  (ag-mode . (lambda() (nlinum-mode -1)))
-  :bind
-  ("C-S-s" . ag)
+  :hook (ag-mode . (lambda() (nlinum-mode -1)))
+  :bind ("C-S-s" . ag)
   )
 
 
@@ -236,8 +233,7 @@
 
 (use-package dumb-jump
   :ensure t
-  :config
-  (setq dumb-jump-prefer-searcher 'ag)
+  :config (setq dumb-jump-prefer-searcher 'ag)
   :bind
   ("M-d o" . dumb-jump-go)
   ("M-d ," . dumb-jump-back)
@@ -265,8 +261,7 @@
 
 (use-package counsel-projectile
   :ensure t
-  :config
-  (declare-function counsel-projectile-mode "counsel-projectile")
+  :init (declare-function counsel-projectile-mode "counsel-projectile")
   :hook (after-init . counsel-projectile-mode)
   )
 
@@ -331,9 +326,8 @@
   (use-package all-the-icons-ivy
     :ensure t
     :after all-the-icons ivy
-    :config
-    (declare-function all-the-icons-ivy-setup "all-the-icons-ivy")
-    (progn (all-the-icons-ivy-setup))
+    :init (declare-function all-the-icons-ivy-setup "all-the-icons-ivy")
+    :config (progn (all-the-icons-ivy-setup))
     )
 
   (use-package spaceline
