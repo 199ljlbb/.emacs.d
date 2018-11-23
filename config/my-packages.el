@@ -32,12 +32,12 @@
 (use-package smartparens
   :ensure t
   :init
+  (declare-function smartparens-global-mode "smartparens")
+  (declare-function sp-local-pair "smartparens")
   (show-paren-mode t)
   (setq-default show-paren-delay 0)
   :diminish smartparens-mode
   :config
-  (declare-function smartparens-global-mode "smartparens")
-  (declare-function sp-local-pair "smartparens")
   (defadvice show-paren-function (around fix-show-paren-function activate)
     (cond ((looking-at-p "\\s(") ad-do-it)
           (t (save-excursion
@@ -50,9 +50,10 @@
 
 (use-package nlinum
   :ensure t
-  :config
+  :init
   (declare-function global-nlinum-mode "nlinum")
   (declare-function nlinum-mode "nlinum")
+  :config
   (setq nlinum-format "%4d")
   :hook (prog-mode . nlinum-mode)
   )
@@ -60,8 +61,7 @@
 
 (use-package popwin
   :ensure t
-  :config
-  (declare-function popwin-mode "popwin")
+  :init (declare-function popwin-mode "popwin")
   :hook (after-init . popwin-mode)
   )
 
@@ -69,8 +69,7 @@
 (use-package which-key
   :ensure t
   :diminish which-key-mode
-  :config
-  (declare-function which-key-mode "which-key")
+  :init (declare-function which-key-mode "which-key")
   :hook (after-init . which-key-mode)
   )
 
@@ -78,7 +77,7 @@
 (use-package company
   :ensure t
   :diminish company-mode "Ⓒ"
-  :config
+  :init
   (declare-function global-company-mode "company")
   (declare-function company-mode "company")
   :hook
@@ -95,8 +94,7 @@
 (use-package flycheck
   :ensure t
   :diminish flycheck-mode "Ⓕ"
-  :config
-  (declare-function global-flycheck-mode "flycheck")
+  :init (declare-function global-flycheck-mode "flycheck")
   :hook (after-init . global-flycheck-mode)
   )
 
@@ -116,8 +114,8 @@
 (use-package ivy
   :ensure t
   :diminish ivy-mode
+  :init (declare-function ivy-mode "ivy")
   :config
-  (declare-function ivy-mode "ivy")
   (ivy-mode t)
   (setq ivy-use-virtual-buffers t)
   (setq ivy-count-format "(%d/%d) ")
@@ -127,8 +125,8 @@
 (use-package swiper
   :ensure t
   :after ivy
-  :init
-  (declare-function swiper "swiper")
+  :init (declare-function swiper "swiper")
+  :config
   (defun swiper-the-region (beg end)
     "Swiper region or 'empty string' if none highlighted."
     (interactive (if (use-region-p)
@@ -147,8 +145,8 @@
 (use-package counsel
   :ensure t
   :after ivy
-  :init
-  (declare-function counsel-ag "counsel")
+  :init (declare-function counsel-ag "counsel")
+  :config
   (defun counsel-ag-the-region (beg end)
     "Counsel ag region or 'empty string' if none highlighted."
     (interactive (if (use-region-p)
@@ -188,9 +186,8 @@
 
 (use-package undo-tree
   :ensure t
-  :config
-  (declare-function global-undo-tree-mode "undo-tree")
-  (global-undo-tree-mode 1)
+  :init (declare-function global-undo-tree-mode "undo-tree")
+  :config (global-undo-tree-mode 1)
   :bind
   ("C-z" . undo)
   ("M-z" . undo-tree-redo)
@@ -250,9 +247,10 @@
 (use-package projectile
   :ensure t
   :diminish projectile-mode
-  :config
+  :init
   (declare-function projectile-mode "projectile")
   (declare-function projectile-project-root "projectile")
+  :config
   (setq projectile-enable-caching t)
   (setq projectile-globally-ignored-file-suffixes
         '("#" "~" ".swp" ".o" ".so" ".exe" ".dll" ".elc" ".pyc" ".jar" "*.class"))
@@ -281,6 +279,7 @@
   (declare-function neotree-hide "neotree")
   (declare-function neotree-find "neotree")
   (declare-function neotree-toggle "neotree")
+  :config
   (defun neotree-project-dir-toggle ()
   "Open NeoTree using the project root (.projectile)"
   (interactive)
@@ -297,7 +296,6 @@
           (neotree-toggle))
         (if file-name
             (neotree-find file-name))))))
-  :config
   (setq neo-create-file-auto-open t
         neo-banner-message nil
         neo-show-updir-line nil
@@ -325,7 +323,7 @@
   (use-package all-the-icons-dired
     :ensure t
     :defer t
-    :commands (use-package font-lock+)
+    :config (use-package font-lock+)
     :after all-the-icons
     :hook (dired-mode . all-the-icons-dired-mode)
     )
@@ -346,6 +344,12 @@
   (use-package spaceline-all-the-icons
     :ensure t
     :after spaceline all-the-icons
+    :init
+    (declare-function spaceline-all-the-icons-theme "spaceline-all-the-icons")
+    (declare-function spaceline-all-the-icons--setup-neotree "spaceline-all-the-icons")
+    (declare-function spaceline-all-the-icons--setup-git-ahead "spaceline-all-the-icons")
+    (declare-function spaceline-toggle-all-the-icons-minor-modes-on "spaceline-all-the-icons")
+    (declare-function spaceline-toggle-all-the-icons-multiple-cursors "spaceline-all-the-icons")
     :config
     (setq powerline-text-scale-factor 1.0)
     (setq spaceline-all-the-icons-separator-type (quote none))
@@ -357,11 +361,6 @@
     (setq spaceline-all-the-icons-hide-long-buffer-path t)
     (setq spaceline-all-the-icons-highlight-file-name t)
     (setq spaceline-all-the-icons-slim-render t)
-    (declare-function spaceline-all-the-icons-theme "spaceline-all-the-icons")
-    (declare-function spaceline-all-the-icons--setup-neotree "spaceline-all-the-icons")
-    (declare-function spaceline-all-the-icons--setup-git-ahead "spaceline-all-the-icons")
-    (declare-function spaceline-toggle-all-the-icons-minor-modes-on "spaceline-all-the-icons")
-    (declare-function spaceline-toggle-all-the-icons-multiple-cursors "spaceline-all-the-icons")
     (spaceline-all-the-icons-theme)
     (spaceline-all-the-icons--setup-neotree)
     (spaceline-all-the-icons--setup-git-ahead)
@@ -378,10 +377,11 @@
 
   (use-package doom-themes
     :ensure t
-    :config
+    :init
     (declare-function doom-themes-visual-bell-config "doom-theme")
     (declare-function doom-themes-neotree-config "doom-theme")
     (declare-function doom-themes-org-config "doom-theme")
+    :config
     (load-theme 'doom-dracula t)
     (doom-themes-visual-bell-config)
     (doom-themes-neotree-config)
@@ -405,9 +405,8 @@
     (feebleline-show-dir t)
     (feebleline-show-time t)
     (feebleline-show-previous-buffer t)
-    :config
-    (declare-function feebleline-mode "feebleline")
-    (feebleline-mode t)
+    :init (declare-function feebleline-mode "feebleline")
+    :config (feebleline-mode t)
     )
   )
 

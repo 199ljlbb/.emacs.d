@@ -43,10 +43,10 @@
   (use-package my-python-config)
   (use-package my-org-config)
   (use-package my-functions)
-)
 
-(setq custom-file (expand-file-name "config/custom-file.el" user-emacs-directory))
-(load-file custom-file)
+  (setq custom-file (expand-file-name "config/custom-file.el" user-emacs-directory))
+  (load-file custom-file)
+)
 
 (provide 'init)
 ;;; init.el ends here
