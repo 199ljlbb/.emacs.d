@@ -33,6 +33,8 @@
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'disable-scroll-bar)
 
+(setq visible-bell nil)
+(setq ring-bell-function 'ignore)
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 (setq make-backup-files nil)
