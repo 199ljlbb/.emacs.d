@@ -80,7 +80,7 @@
   (end-of-line)
   (forward-char)
   )
-(global-set-key (kbd "C-l") 'select-a-line)
+(global-set-key (kbd "M-l") 'select-a-line)
 
 
 (defun toggle-window-split ()

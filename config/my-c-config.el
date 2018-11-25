@@ -12,6 +12,7 @@
 
 (use-package cc-mode
   :ensure t
+  :defer t
   :config
   (define-key c-mode-base-map (kbd "C-d") nil)
   )

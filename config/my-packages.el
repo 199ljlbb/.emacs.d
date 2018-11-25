@@ -23,6 +23,12 @@
   )
 
 
+(use-package async
+  :ensure t
+  :commands (async-start)
+  )
+
+
 (use-package unicode-fonts
   :ensure t
   :commands (unicode-fonts-setup)
@@ -69,6 +75,7 @@
   :ensure t
   :diminish which-key-mode
   :init (declare-function which-key-mode "which-key")
+  :bind* ("M-m ?" . which-key-show-top-level)
   :hook (after-init . which-key-mode)
   )
 
@@ -110,6 +117,7 @@
 
 (use-package ivy
   :ensure t
+  :defer t
   :diminish ivy-mode
   :init (declare-function ivy-mode "ivy")
   :config
@@ -121,6 +129,7 @@
 
 (use-package swiper
   :ensure t
+  :defer t
   :after ivy
   :init (declare-function swiper "swiper")
   :config
@@ -141,6 +150,7 @@
 
 (use-package counsel
   :ensure t
+  :defer t
   :after ivy
   :init (declare-function counsel-ag "counsel")
   :config
@@ -242,6 +252,7 @@
 
 (use-package projectile
   :ensure t
+  :defer t
   :diminish projectile-mode
   :init
   (declare-function projectile-mode "projectile")
@@ -387,10 +398,16 @@
 
 (defun terminal-mode-config ()
   "Configurations for terminal mode."
-  (use-package material-theme
+  (use-package doom-themes
     :ensure t
-    :config (enable-theme 'material)
+    :config
+    (load-theme 'doom-nova t)
     )
+
+  ;; (use-package material-theme
+  ;;   :ensure t
+  ;;   :config (enable-theme 'material)
+  ;;   )
 
   (use-package feebleline
     :ensure t
