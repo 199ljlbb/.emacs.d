@@ -409,17 +409,18 @@
   ;;   :config (enable-theme 'material)
   ;;   )
 
-  (use-package feebleline
+  (use-package doom-modeline
     :ensure t
-    :custom
-    (feebleline-show-git-branch t)
-    (feebleline-show-dir t)
-    (feebleline-show-time t)
-    (feebleline-show-previous-buffer t)
-    :init (declare-function feebleline-mode "feebleline")
-    :config (feebleline-mode t)
+    :defer t
+    :hook (after-init . doom-modeline-init)
+    :config
+    (setq doom-modeline-height 10)
+    (setq doom-modeline-bar-width 3)
+    (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
+    (setq doom-modeline-icon t)
+    (setq doom-modeline-major-mode-icon t)
     )
-  )
+)
 
 
 (cond (is-windows? (gui-mode-config))
