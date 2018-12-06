@@ -401,7 +401,7 @@
   (use-package doom-themes
     :ensure t
     :config
-    (load-theme 'doom-nova t)
+    (load-theme 'doom-dracula t)
     )
 
   ;; (use-package material-theme
@@ -423,7 +423,7 @@
 )
 
 
-(cond (is-windows? (gui-mode-config))
+(cond (is-windows? (if (display-graphic-p) (terminal-mode-config) (gui-mode-config)))
       (is-macos? (if (display-graphic-p) (gui-mode-config) (terminal-mode-config)))
       (is-linux? (if (display-graphic-p) (gui-mode-config) (terminal-mode-config)))
       )
