@@ -11,7 +11,7 @@
   (revert-buffer t (not (buffer-modified-p)) t))
 
 
-;;Set smooth scroll
+;; Set smooth scroll
 (defun smooth-scroll (number-lines increment)
   "Set smmoth scroll (NUMBER-LINES INCREMENT)."
   (if (= 0 number-lines) t
@@ -20,7 +20,7 @@
       (scroll-up increment)
       (smooth-scroll (- number-lines 1) increment))))
 
-;;Enable mouse scroll
+;; Enable mouse scroll
 (global-set-key [(mouse-5)] '(lambda () (interactive) (smooth-scroll 1 1)))
 (global-set-key [(mouse-4)] '(lambda () (interactive) (smooth-scroll 1 -1)))
 
