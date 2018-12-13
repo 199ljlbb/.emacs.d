@@ -5,6 +5,20 @@
 ;;;
 ;;; Code:
 
+
+;; Set GC to avoid random freezing.
+(defun my-minibuffer-setup-hook ()
+  "Set GC to maximum value when start a hook."
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun my-minibuffer-exit-hook ()
+  "Set GC to default value when end a hook."
+  (setq gc-cons-threshold 800000))
+
+(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+
+
 (defun refresh-file ()
   "Refresh the current file."
   (interactive)

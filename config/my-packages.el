@@ -330,7 +330,7 @@
   (doom-themes-visual-bell-config)
   (doom-themes-neotree-config)
   (doom-themes-org-config)
-  (setq-default doom-neotree-file-icons t)
+  (if (display-graphic-p) (setq-default doom-neotree-file-icons t))
   )
 
 
