@@ -1,5 +1,29 @@
 * emacs.d
 ** init.el
 *** my-package.el
+#+BEGIN_SRC lisp
+  (use-package diminish
+    :ensure t
+    :diminish abbrev-mode eldoc-mode
+    )
+
+
+  (use-package magit
+    :ensure t
+    :defer t
+    )
+
+
+  (use-package async
+    :ensure t
+    :commands (async-start)
+    )
+
+
+  (use-package unicode-fonts
+    :ensure t
+    :commands (unicode-fonts-setup)
+    )
+#+END_SRC
 *** my-function.el
 *** my-configuration.el
