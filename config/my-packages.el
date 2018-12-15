@@ -319,6 +319,21 @@
   )
 
 
+(use-package doom-themes
+  :ensure t
+  :init
+  (declare-function doom-themes-visual-bell-config "doom-theme")
+  (declare-function doom-themes-neotree-config "doom-theme")
+  (declare-function doom-themes-org-config "doom-theme")
+  :config
+  (load-theme 'doom-dracula t)
+  (doom-themes-visual-bell-config)
+  (doom-themes-neotree-config)
+  (doom-themes-org-config)
+  (if (display-graphic-p) (setq-default doom-neotree-file-icons t))
+  )
+
+
 (defun gui-mode-config ()
   "Configurations for all-the-icons."
   (use-package all-the-icons
@@ -379,48 +394,23 @@
     :config (setq highlight-indent-guides-method 'character)
     :hook (prog-mode . highlight-indent-guides-mode)
     )
-
-  (use-package doom-themes
-    :ensure t
-    :init
-    (declare-function doom-themes-visual-bell-config "doom-theme")
-    (declare-function doom-themes-neotree-config "doom-theme")
-    (declare-function doom-themes-org-config "doom-theme")
-    :config
-    (load-theme 'doom-dracula t)
-    (doom-themes-visual-bell-config)
-    (doom-themes-neotree-config)
-    (doom-themes-org-config)
-    (setq-default doom-neotree-file-icons t)
-    )
   )
 
 
 (defun terminal-mode-config ()
   "Configurations for terminal mode."
-  (use-package doom-themes
-    :ensure t
-    :config
-    (load-theme 'doom-dracula t)
-    )
-
-  ;; (use-package material-theme
-  ;;   :ensure t
-  ;;   :config (enable-theme 'material)
-  ;;   )
-
   (use-package doom-modeline
     :ensure t
     :defer t
     :hook (after-init . doom-modeline-init)
     :config
+    (setq inhibit-compacting-font-caches t)
     (setq doom-modeline-height 10)
     (setq doom-modeline-bar-width 3)
-    (setq doom-modeline-buffer-file-name-style 'truncate-upto-project)
-    (setq doom-modeline-icon t)
-    (setq doom-modeline-major-mode-icon t)
+    (setq doom-modeline-minor-modes t)
+    (setq doom-modeline-buffer-file-name-style 'file-name)
     )
-)
+  )
 
 
 (cond (is-windows? (if (display-graphic-p) (terminal-mode-config) (gui-mode-config)))

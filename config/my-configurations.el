@@ -41,6 +41,7 @@
 (setq auto-save-default nil)
 (setq shift-select-mode t)
 (setq-default default-tab-width 4)
+(setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
 (setq-default c-basic-offset 4)
 

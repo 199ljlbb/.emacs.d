@@ -5,13 +5,27 @@
 ;;;
 ;;; Code:
 
+
+;; Set GC to avoid random freezing.
+(defun my-minibuffer-setup-hook ()
+  "Set GC to maximum value when start a hook."
+  (setq gc-cons-threshold most-positive-fixnum))
+
+(defun my-minibuffer-exit-hook ()
+  "Set GC to default value when end a hook."
+  (setq gc-cons-threshold 800000))
+
+(add-hook 'minibuffer-setup-hook #'my-minibuffer-setup-hook)
+(add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
+
+
 (defun refresh-file ()
   "Refresh the current file."
   (interactive)
   (revert-buffer t (not (buffer-modified-p)) t))
 
 
-;;Set smooth scroll
+;; Set smooth scroll
 (defun smooth-scroll (number-lines increment)
   "Set smmoth scroll (NUMBER-LINES INCREMENT)."
   (if (= 0 number-lines) t
@@ -20,7 +34,7 @@
       (scroll-up increment)
       (smooth-scroll (- number-lines 1) increment))))
 
-;;Enable mouse scroll
+;; Enable mouse scroll
 (global-set-key [(mouse-5)] '(lambda () (interactive) (smooth-scroll 1 1)))
 (global-set-key [(mouse-4)] '(lambda () (interactive) (smooth-scroll 1 -1)))
 
