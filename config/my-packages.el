@@ -219,7 +219,7 @@
 (use-package highlight-symbol
   :ensure t
   :config
-  (setq highlight-symbol-colors '("Pink" "DarkOrange" "yellow" "green" "DodgerBlue1"))
+  (setq highlight-symbol-colors '("Red" "Pink" "DarkOrange" "green" "DodgerBlue1"))
   :bind
   ("C-k C-h" . highlight-symbol-at-point)
   ("C-k C-c" . highlight-symbol-remove-all)
@@ -358,11 +358,13 @@
 
   (use-package spaceline
     :ensure t
+    :pin melpa-stable
     :custom-face (spaceline-highlight-face ((t (:background "white" :foreground "#3E3D31" :inherit (quote mode-line)))))
     )
 
   (use-package spaceline-all-the-icons
     :ensure t
+    :pin melpa-stable
     :after spaceline all-the-icons
     :init
     (declare-function spaceline-all-the-icons-theme "spaceline-all-the-icons")
