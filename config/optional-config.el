@@ -27,11 +27,11 @@
 
 
 ;; Font
-;; (let* ((font "Fira Mono")
-;;        (size 9)
-;;        (font-size (format "%s-%s" font size)))
-;;   (setq default-frame-alist `((font . ,font-size)))
-;;   (set-face-attribute 'default t :font font-size))
+(let* ((font "Fira Mono")
+       (size 9)
+       (font-size (format "%s-%s" font size)))
+  (setq default-frame-alist `((font . ,font-size)))
+  (set-face-attribute 'default t :font font-size))
 
 
 

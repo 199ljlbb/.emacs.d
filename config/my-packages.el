@@ -127,6 +127,18 @@
   )
 
 
+(use-package ivy-posframe
+  :ensure t
+  :diminish ivy-posframe-mode
+  :config
+  (setq ivy-posframe-display-functions-alist
+        '((swiper          . ivy-posframe-display-at-frame-center)
+          (complete-symbol . ivy-posframe-display-at-point)
+          (counsel-M-x     . ivy-posframe-display-at-frame-center)
+          (t               . ivy-posframe-display-at-frame-center)))
+  (ivy-posframe-mode 1)
+  )
+
 (use-package swiper
   :ensure t
   :defer t
@@ -243,12 +255,16 @@
 
 (use-package dumb-jump
   :ensure t
-  :config (setq dumb-jump-prefer-searcher 'ag)
-  :bind
-  ("M-d o" . dumb-jump-go)
-  ("M-d ," . dumb-jump-back)
+  :config
+  (setq dumb-jump-prefer-searcher 'ag)
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   )
 
+
+(use-package dashboard
+  :ensure t
+  :config (dashboard-setup-startup-hook)
+  )
 
 (use-package projectile
   :ensure t
