@@ -10,14 +10,6 @@
 (defvar is-macos?)
 (defvar is-linux?)
 
-;; Windows gc
-(when is-windows?
-  (setq gc-cons-threshold (* 512 1024 1024))
-  (setq gc-cons-percentage 0.5)
-  (run-with-idle-timer 5 t #'garbage-collect)
-  (setq inhibit-compacting-font-caches t)
-  )
-
 
 ;; Proxy
 ;; (setq-default url-proxy-services

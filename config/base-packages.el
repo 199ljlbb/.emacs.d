@@ -132,8 +132,7 @@
           ("white" . "OliveDrab")))
   :bind
   ("C-k C-h" . highlight-symbol-at-point)
-  ("C-k C-c" . highlight-symbol-remove-all)
-  )
+  ("C-k C-c" . highlight-symbol-remove-all))
 
 
 (use-package ag
