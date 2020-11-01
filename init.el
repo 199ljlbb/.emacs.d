@@ -5,17 +5,9 @@
 ;;;
 ;;; Code:
 
-(defvar is-linux? (eq system-type 'gnu/linux)
-  "Is operating system Linux?"
-  )
-
-(defvar is-macos? (eq system-type 'darwin)
-  "Is operating system Macos?"
-  )
-
-(defvar is-windows? (eq system-type 'windows-nt)
-  "Is operating system Windows?"
-  )
+(defvar is-linux? (eq system-type 'gnu/linux) "Is operating system Linux?")
+(defvar is-macos? (eq system-type 'darwin) "Is operating system Macos?")
+(defvar is-windows? (eq system-type 'windows-nt) "Is operating system Windows?")
 
 (let ((file-name-handler-alist nil))
   (push "~/.emacs.d/config" load-path)
@@ -35,7 +27,9 @@
   (require 'bind-key)
 
   (use-package my-key-set)
-  (use-package my-packages)
+  (use-package base-packages)
+  (use-package theme)
+  (use-package prog-packages)
   (use-package my-configurations)
   (use-package my-c-config)
   (use-package my-js-config)
