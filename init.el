@@ -30,11 +30,11 @@
   (use-package base-packages)
   (use-package theme)
   (use-package prog-packages)
+  (use-package python-config)
   (use-package my-configurations)
   (use-package my-c-config)
   (use-package my-js-config)
   (use-package my-web-config)
-  (use-package my-python-config)
   (use-package my-org-config)
   (use-package my-functions)
 

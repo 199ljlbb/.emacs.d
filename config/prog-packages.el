@@ -123,8 +123,6 @@
   (tooltip-mode 1)
   (dap-ui-controls-mode 1))
 
-(use-package dap-python
-  :after dap-mode)
 
 (provide 'prog-packages)
 ;;; prog-packages.el ends here
