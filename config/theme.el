@@ -42,8 +42,7 @@
     :ensure t
     :after all-the-icons ivy
     :init (declare-function all-the-icons-ivy-setup "all-the-icons-ivy")
-    :config (progn (all-the-icons-ivy-setup)))
-  )
+    :config (progn (all-the-icons-ivy-setup))))
 
 
 (defun spaceline-config ()
@@ -51,8 +50,7 @@
   (all-the-icons-config)
   (use-package spaceline
     :ensure t
-    :custom-face (spaceline-highlight-face ((t (:background "white" :foreground "#3E3D31" :inherit (quote mode-line)))))
-    )
+    :custom-face (spaceline-highlight-face ((t (:background "white" :foreground "#3E3D31" :inherit (quote mode-line))))))
 
   (use-package spaceline-all-the-icons
     :ensure t
@@ -75,19 +73,14 @@
     (setq spaceline-all-the-icons-highlight-file-name t)
     (setq spaceline-all-the-icons-slim-render t)
     (spaceline-all-the-icons-theme)
-    (spaceline-all-the-icons--setup-neotree)
     (spaceline-all-the-icons--setup-git-ahead)
-    (spaceline-toggle-all-the-icons-minor-modes-on)
-    (spaceline-toggle-all-the-icons-multiple-cursors)
-    )
+    (spaceline-toggle-all-the-icons-multiple-cursors))
 
   (use-package highlight-indent-guides
     :ensure t
     :diminish highlight-indent-guides-mode
     :config (setq highlight-indent-guides-method 'character)
-    :hook (prog-mode . highlight-indent-guides-mode)
-    )
-  )
+    :hook (prog-mode . highlight-indent-guides-mode)))
 
 
 (defun doom-modeline-config ()
@@ -109,15 +102,12 @@
     (setq doom-modeline-major-mode-color-icon t)
     (setq doom-modeline-buffer-modification-icon t)
     (setq doom-modeline-lsp t)
-    (setq doom-modeline-env-version t)
-    )
-  )
+    (setq doom-modeline-env-version t)))
 
 
 (cond (is-windows? (if (display-graphic-p) (progn (all-the-icons-config) (doom-modeline-config)) (spaceline-config)))
       (is-macos? (if (display-graphic-p) (spaceline-config) (doom-modeline-config)))
-      (is-linux? (if (display-graphic-p) (spaceline-config) (doom-modeline-config)))
-      )
+      (is-linux? (if (display-graphic-p) (spaceline-config) (doom-modeline-config))))
 
 
 (provide 'theme)
